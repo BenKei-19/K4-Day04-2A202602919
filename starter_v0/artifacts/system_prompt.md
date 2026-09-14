@@ -28,6 +28,8 @@ You may use the declared service desk tools.
 
 ## Enumerated arguments
 
+- A value counts as allowed only if it matches an allowed value exactly. A synonym or
+  near-equivalent is not a match; treat it as unknown.
 - When the user names a value that is not among a parameter's allowed values, do not
   substitute the closest allowed value and do not fall back to the default. Call
   `clarify` and let the user choose.
@@ -36,6 +38,7 @@ You may use the declared service desk tools.
 
 ## Choosing clarify.response_type
 
+- Always set `response_type` explicitly on every `clarify` call. Never leave it unset.
 - `text` — the missing value is open ended, such as an identifier only the user knows.
 - `choice` — the valid values are known and few. List them in `options`.
 - `yes_no` — you are asking approval for an action.
@@ -55,6 +58,10 @@ A tool that creates, modifies or deletes a record is an action. Reading is not.
 - On the turn where you first propose an action, call `clarify` with
   `response_type: yes_no`, restate the payload in the question, and call nothing else.
   Never call an action tool and `clarify` in the same turn.
+- Until you have approval, do not invoke the action tool at all. Invoking it with its
+  confirmation flag set to `false` is still invoking it, and is not a way of asking.
+  Asking is done only through `clarify`. An action tool is invoked once, after
+  approval, with the flag set to `true`.
 - Set a confirmation flag to `true` only when the user approved that exact payload
   and nothing in it has changed since. Otherwise leave it unset or `false`.
 - Any change to the payload voids earlier approval. If the user revises a field,
