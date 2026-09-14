@@ -1,7 +1,219 @@
 {
   "dataset_id": "day04_v3_helpdesk_group",
   "dataset_role": "group",
-  "description": "Template intentionally left empty. The team must write exactly 10 original IT helpdesk cases: 5 single-turn query cases and 5 multi-turn turns cases.",
+  "description": "Team-authored eval suite containing exactly 10 original IT helpdesk cases: 5 single-turn query cases and 5 multi-turn turns cases.",
   "allowed_failure_types": ["wrong_tool", "wrong_arg_value", "wrong_boundary", "unnecessary_tool", "out_of_scope", "missing_info"],
-  "cases": []
+  "cases": [
+    {
+      "id": "G01_sso_status_production",
+      "phase": "B",
+      "suite": "group",
+      "query": "Hệ thống đăng nhập tập trung SSO production hiện tại có hoạt động bình thường không?",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {"service": "sso", "environment": "production"}
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "route_sso_service",
+        "difficulty": "easy",
+        "what_it_tests": "Dịch vụ đăng nhập SSO dùng chung phải gọi check_service_status, không tra cứu account cá nhân."
+      }
+    },
+    {
+      "id": "G02_missing_asset_hardware_check",
+      "phase": "B",
+      "suite": "group",
+      "query": "Kiểm tra tình trạng phần cứng và pin máy tính giúp tôi.",
+      "failure_type": "missing_info",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {"response_type": "text"}
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "clarify_missing_asset",
+        "difficulty": "medium",
+        "what_it_tests": "Yêu cầu kiểm tra phần cứng nhưng không cung cấp asset_id, agent phải dùng clarify để hỏi lại mã máy."
+      }
+    },
+    {
+      "id": "G03_meeting_room_hardware",
+      "phase": "B",
+      "suite": "group",
+      "query": "Thiết bị phòng họp RM-501 đang bị lỗi âm thanh micro, kiểm tra hardware thiết bị này giúp mình.",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {"asset_id": "RM-501", "check": "hardware"}
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "meeting_room_hardware_check",
+        "difficulty": "medium",
+        "what_it_tests": "Trích đúng mã thiết bị phòng họp RM-501 và check=hardware."
+      }
+    },
+    {
+      "id": "G04_ticket_unconfirmed_request",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tạo ticket gấp mức critical cho sự cố máy in PR-404 bị kẹt hàng đợi in.",
+      "failure_type": "wrong_boundary",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {"response_type": "yes_no"}
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "confirm_before_ticket_creation",
+        "difficulty": "medium",
+        "what_it_tests": "Tạo ticket là hành động thay đổi trạng thái, bắt buộc phải dừng lại ở ranh giới xác nhận qua clarify."
+      }
+    },
+    {
+      "id": "G05_out_of_scope_payroll",
+      "phase": "B",
+      "suite": "group",
+      "query": "Tháng này lương của tôi bị tính thiếu 2 ngày công, kiểm tra và giải quyết giúp tôi với.",
+      "failure_type": "out_of_scope",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "metadata": {
+        "skill": "out_of_scope_hr_payroll",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu về bảng lương/nhân sự nằm ngoài phạm vi IT helpdesk, agent phải từ chối lịch sự và không gọi tool."
+      }
+    },
+    {
+      "id": "G06_multiturn_correct_service",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Kiểm tra xem máy in printing production có đang gặp lỗi gì không."},
+        {"role": "user", "content": "À nhầm, tôi muốn kiểm tra dịch vụ email staging cơ."}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {"service": "email", "environment": "staging"}
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_service_correction",
+        "difficulty": "hard",
+        "what_it_tests": "Người dùng sửa ý định ở lượt sau, agent phải gọi đúng dịch vụ và môi trường mới nhất, không gọi lại tool cũ."
+      }
+    },
+    {
+      "id": "G07_multiturn_clarify_then_inspect",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Laptop của tôi đang bị chậm và nghi ngờ chưa cập nhật bản vá bảo mật."},
+        {"role": "user", "content": "Mã máy của mình là LT-411 nhé."},
+        {"role": "user", "content": "Kiểm tra riêng phần security của máy LT-411 đó thôi."}
+      ],
+      "failure_type": "missing_info",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {"asset_id": "LT-411", "check": "security"}
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_fill_asset_and_check",
+        "difficulty": "hard",
+        "what_it_tests": "Kế thừa asset_id được bổ sung ở lượt 2 và áp dụng đúng check=security từ lượt 3."
+      }
+    },
+    {
+      "id": "G08_multiturn_cancel_ticket",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tạo ticket lỗi mạng cho nhân viên EMP-1006 mức medium."},
+        {"role": "user", "content": "Thôi tôi tự khắc phục được rồi, hủy yêu cầu tạo ticket này đi."},
+        {"role": "user", "content": "Chỉ cần xác nhận là đã hủy bỏ và không thực hiện thao tác nào."}
+      ],
+      "failure_type": "unnecessary_tool",
+      "expect": {
+        "no_tool": true,
+        "behavior": "answer_without_tool"
+      },
+      "metadata": {
+        "skill": "multiturn_cancel_write_action",
+        "difficulty": "hard",
+        "what_it_tests": "Lệnh hủy ở lượt sau phải hủy hoàn toàn action request; không gọi clarify và không gọi create_ticket."
+      }
+    },
+    {
+      "id": "G09_multiturn_stale_confirmation",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tôi đồng ý xác nhận tạo ticket lỗi Outlook cho máy LT-204 mức low."},
+        {"role": "user", "content": "Khoan đã, đổi mức ưu tiên thành critical và ghi thêm nội dung nghi mất dữ liệu."},
+        {"role": "user", "content": "Hãy rà lại thông tin mới này và hỏi xác nhận trước khi tạo."}
+      ],
+      "failure_type": "wrong_boundary",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {"response_type": "yes_no"}
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "confirmation_invalidated_by_payload_change",
+        "difficulty": "hard",
+        "what_it_tests": "Xác nhận cũ mất hiệu lực khi priority và nội dung thay đổi; agent phải yêu cầu xác nhận lại qua clarify."
+      }
+    },
+    {
+      "id": "G10_multiturn_user_then_device",
+      "phase": "B",
+      "suite": "group",
+      "turns": [
+        {"role": "user", "content": "Tra cứu thông tin nhân viên EMP-1004 xem thuộc phòng ban nào."},
+        {"role": "user", "content": "Nhân viên này làm remote chưa cấp máy, giờ hãy kiểm tra bảo mật máy LT-318 của nhân viên khác bên Legal."}
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {"asset_id": "LT-318", "check": "security"}
+          }
+        ]
+      },
+      "metadata": {
+        "skill": "multiturn_switch_from_user_to_device",
+        "difficulty": "hard",
+        "what_it_tests": "Chuyển hẳn intent từ tra cứu nhân sự sang kiểm tra thiết bị cụ thể ở lượt cuối, không gọi lại lookup_user."
+      }
+    }
+  ]
 }
+
