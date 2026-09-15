@@ -1,0 +1,405 @@
+{
+  "run_id": "v4_B_group_openrouter_20260915T120000",
+  "version": "v4",
+  "artifact_version": "v4+71d4ab9c0c+eb3e2243f2",
+  "prompt_hash": "71d4ab9c0c19e087d75a678fffe7985111cbba680fff3ff086f8d2c37708a990",
+  "tools_hash": "eb3e2243f23747297c1204e5e56f852f5e869f00cb97baae7786baefcabbc419",
+  "phase": "B",
+  "suite": "group",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.5",
+  "system_prompt": "system_prompt.md",
+  "tools": "tools.yaml",
+  "eval_cases": "data/eval_group.json",
+  "dataset_id": "day04_v3_helpdesk_group",
+  "dataset_role": "group",
+  "description": "Auto-generated run for submission",
+  "generated_at": "2026-09-15T11:32:48.053340",
+  "summary": {
+    "total_cases": 10,
+    "measured_cases": 10,
+    "provider_error_cases": 0,
+    "passed_cases": 10,
+    "case_accuracy": 1.0,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "G01_sso_status_production",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_sso_service",
+        "difficulty": "easy",
+        "what_it_tests": "Dịch vụ đăng nhập SSO dùng chung phải gọi check_service_status, không tra cứu account cá nhân."
+      },
+      "input": "Hệ thống đăng nhập tập trung SSO production hiện tại có hoạt động bình thường không?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "sso",
+              "environment": "production"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "sso",
+              "environment": "production"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "G02_missing_asset_hardware_check",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_missing_asset",
+        "difficulty": "medium",
+        "what_it_tests": "Yêu cầu kiểm tra phần cứng nhưng không cung cấp asset_id, agent phải dùng clarify để hỏi lại mã máy."
+      },
+      "input": "Kiểm tra tình trạng phần cứng và pin máy tính giúp tôi.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "G03_meeting_room_hardware",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "meeting_room_hardware_check",
+        "difficulty": "medium",
+        "what_it_tests": "Trích đúng mã thiết bị phòng họp RM-501 và check=hardware."
+      },
+      "input": "Thiết bị phòng họp RM-501 đang bị lỗi âm thanh micro, kiểm tra hardware thiết bị này giúp mình.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "RM-501",
+              "check": "hardware"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "RM-501",
+              "check": "hardware"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "G04_ticket_unconfirmed_request",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "confirm_before_ticket_creation",
+        "difficulty": "medium",
+        "what_it_tests": "Tạo ticket là hành động thay đổi trạng thái, bắt buộc phải dừng lại ở ranh giới xác nhận qua clarify."
+      },
+      "input": "Tạo ticket gấp mức critical cho sự cố máy in PR-404 bị kẹt hàng đợi in.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "G05_out_of_scope_payroll",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_hr_payroll",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu về bảng lương/nhân sự nằm ngoài phạm vi IT helpdesk, agent phải từ chối lịch sự và không gọi tool."
+      },
+      "input": "Tháng này lương của tôi bị tính thiếu 2 ngày công, kiểm tra và giải quyết giúp tôi với.",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "actual": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "G06_multiturn_correct_service",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_service_correction",
+        "difficulty": "hard",
+        "what_it_tests": "Người dùng sửa ý định ở lượt sau, agent phải gọi đúng dịch vụ và môi trường mới nhất, không gọi lại tool cũ."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "email",
+              "environment": "staging"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "email",
+              "environment": "staging"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "G07_multiturn_clarify_then_inspect",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_fill_asset_and_check",
+        "difficulty": "hard",
+        "what_it_tests": "Kế thừa asset_id được bổ sung ở lượt 2 và áp dụng đúng check=security từ lượt 3."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-411",
+              "check": "security"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-411",
+              "check": "security"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "G08_multiturn_cancel_ticket",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_cancel_write_action",
+        "difficulty": "hard",
+        "what_it_tests": "Lệnh hủy ở lượt sau phải hủy hoàn toàn action request; không gọi clarify và không gọi create_ticket."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "no_tool": true,
+        "behavior": "answer_without_tool"
+      },
+      "actual": {
+        "no_tool": true,
+        "behavior": "answer_without_tool"
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "G09_multiturn_stale_confirmation",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "confirmation_invalidated_by_payload_change",
+        "difficulty": "hard",
+        "what_it_tests": "Xác nhận cũ mất hiệu lực khi priority và nội dung thay đổi; agent phải yêu cầu xác nhận lại qua clarify."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "G10_multiturn_user_then_device",
+      "phase": "B",
+      "suite": "group",
+      "case_suite": "group",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_from_user_to_device",
+        "difficulty": "hard",
+        "what_it_tests": "Chuyển hẳn intent từ tra cứu nhân sự sang kiểm tra thiết bị cụ thể ở lượt cuối, không gọi lại lookup_user."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-318",
+              "check": "security"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-318",
+              "check": "security"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    }
+  ]
+}

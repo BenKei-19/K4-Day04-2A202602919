@@ -1,0 +1,1245 @@
+{
+  "run_id": "v4_B_base_openrouter_20260914T200937925494",
+  "version": "v4",
+  "artifact_version": "v4+71d4ab9c0c+eb3e2243f2",
+  "prompt_hash": "71d4ab9c0c19e087d75a678fffe7985111cbba680fff3ff086f8d2c37708a990",
+  "tools_hash": "eb3e2243f23747297c1204e5e56f852f5e869f00cb97baae7786baefcabbc419",
+  "phase": "B",
+  "suite": "base",
+  "provider": "openrouter",
+  "model": "openai/gpt-5.5",
+  "system_prompt": "system_prompt.md",
+  "tools": "tools.yaml",
+  "eval_cases": "data/eval_base.json",
+  "dataset_id": "day04_v3_helpdesk_base",
+  "dataset_role": "base",
+  "description": "Auto-generated run for submission",
+  "generated_at": "2026-09-15T11:32:48.048352",
+  "summary": {
+    "total_cases": 30,
+    "measured_cases": 30,
+    "provider_error_cases": 0,
+    "passed_cases": 26,
+    "case_accuracy": 0.8666666666666667,
+    "failure_counts": {},
+    "observed_mismatch_counts": {}
+  },
+  "results": [
+    {
+      "id": "H01_service_status_routing",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_shared_service",
+        "difficulty": "easy",
+        "what_it_tests": "Trạng thái dịch vụ dùng chung phải dùng status tool, không inspect một thiết bị."
+      },
+      "input": "Dịch vụ VPN production hiện có đang gặp sự cố không?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "vpn",
+              "environment": "production"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "vpn",
+              "environment": "production"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H02_device_routing",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_device",
+        "difficulty": "easy",
+        "what_it_tests": "Một asset cụ thể phải dùng inspect_device."
+      },
+      "input": "Kiểm tra tổng thể laptop LT-204 giúp mình.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "all"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "all"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H03_kb_routing",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_howto",
+        "difficulty": "medium",
+        "what_it_tests": "Yêu cầu hướng dẫn dùng knowledge base, không status hay device inspection."
+      },
+      "input": "Tìm hướng dẫn cấu hình Outlook profile trên Windows 11.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_kb",
+            "args": {
+              "category": "email"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "search_kb",
+            "args": {
+              "category": "email"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H04_user_routing",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "route_employee",
+        "difficulty": "easy",
+        "what_it_tests": "Employee ID phải đi vào directory lookup."
+      },
+      "input": "Tra cứu tài khoản nhân viên EMP-1003 và thiết bị được cấp.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup_user",
+            "args": {
+              "employee_id": "EMP-1003"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "lookup_user",
+            "args": {
+              "employee_id": "EMP-1003"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H05_device_check_arg",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "device_check_arg",
+        "difficulty": "medium",
+        "what_it_tests": "Trích đúng asset ID và check=vpn."
+      },
+      "input": "Kiểm tra riêng kết nối VPN trên LT-204.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "vpn"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "vpn"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H06_environment_arg",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "environment_arg",
+        "difficulty": "medium",
+        "what_it_tests": "Không được đổi staging thành production mặc định."
+      },
+      "input": "Email staging đang hoạt động bình thường chứ?",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "email",
+              "environment": "staging"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "email",
+              "environment": "staging"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H07_format_report",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "format_existing_findings",
+        "difficulty": "medium",
+        "what_it_tests": "Đã có findings thì chỉ format, không gọi tool thu thập lại."
+      },
+      "input": "Trình bày các finding sau thành báo cáo kỹ thuật tên 'VPN LT-204': VPN AUTH_TIMEOUT; service VPN degraded.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "format_incident_report",
+            "args": {
+              "template": "technical",
+              "incident_title": "VPN LT-204"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "format_incident_report",
+            "args": {
+              "template": "technical",
+              "incident_title": "VPN LT-204"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H08_out_of_scope",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope",
+        "difficulty": "easy",
+        "what_it_tests": "Yêu cầu ngoài IT helpdesk không gọi tool."
+      },
+      "input": "Gợi ý cho mình công thức nấu phở bò.",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "actual": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H09_meta_no_tool",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "meta_no_tool",
+        "difficulty": "easy",
+        "what_it_tests": "Câu hỏi năng lực trả lời trực tiếp."
+      },
+      "input": "Bạn là gì và có thể hỗ trợ những việc nào?",
+      "expect": {
+        "no_tool": true,
+        "behavior": "answer_without_tool"
+      },
+      "actual": {
+        "no_tool": true,
+        "behavior": "answer_without_tool"
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H10_missing_asset",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_asset",
+        "difficulty": "medium",
+        "what_it_tests": "Thiếu asset ID phải hỏi, không đoán LT-204."
+      },
+      "input": "Kiểm tra Wi-Fi trên laptop của mình giúp nhé.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H11_missing_employee",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_employee",
+        "difficulty": "medium",
+        "what_it_tests": "Tên mơ hồ và thiếu employee ID phải hỏi lại."
+      },
+      "input": "Kiểm tra tài khoản của bạn nhân viên bên Sales giúp mình.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H12_confirm_before_ticket",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "confirm_write",
+        "difficulty": "medium",
+        "what_it_tests": "Tạo ticket là write action, phải xác nhận trước."
+      },
+      "input": "Tạo ticket mức high cho lỗi VPN trên LT-204 giúp mình.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H13_parallel_status_and_device",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "parallel_tools",
+        "difficulty": "hard",
+        "what_it_tests": "Một yêu cầu cần cả shared status và device evidence; thứ tự không quan trọng."
+      },
+      "input": "VPN trên LT-204 lỗi; kiểm tra cả trạng thái VPN production và máy đó.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "vpn",
+              "environment": "production"
+            }
+          },
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "vpn"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "vpn",
+              "environment": "production"
+            }
+          },
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "vpn"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H14_out_of_scope_coding",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "out_of_scope_coding",
+        "difficulty": "easy",
+        "what_it_tests": "Coding project ngoài helpdesk không gọi tool."
+      },
+      "input": "Viết một REST API quản lý bán hàng bằng Python.",
+      "expect": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "actual": {
+        "no_tool": true,
+        "behavior": "refuse"
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "M01_clarify_then_asset",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_fill_asset",
+        "difficulty": "hard",
+        "what_it_tests": "Carry asset ID rồi dùng check mới nhất."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-240",
+              "check": "network"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-240",
+              "check": "network"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "M02_carry_environment",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_carry_environment",
+        "difficulty": "hard",
+        "what_it_tests": "Đổi service nhưng giữ environment từ lượt trước."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "email",
+              "environment": "staging"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "email",
+              "environment": "staging"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "M03_correct_asset",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_correction",
+        "difficulty": "hard",
+        "what_it_tests": "Thông tin sửa sau phải thắng thông tin cũ."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-240",
+              "check": "security"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-240",
+              "check": "security"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "M04_correct_employee",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_employee_correction",
+        "difficulty": "medium",
+        "what_it_tests": "Employee ID được sửa ở lượt sau."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup_user",
+            "args": {
+              "employee_id": "EMP-1003"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "lookup_user",
+            "args": {
+              "employee_id": "EMP-1003"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "M05_ticket_confirmation",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_confirmation",
+        "difficulty": "hard",
+        "what_it_tests": "Sau sửa priority vẫn phải dừng ở confirmation boundary."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "M06_switch_tool",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_switch_tool",
+        "difficulty": "hard",
+        "what_it_tests": "Intent mới thay status bằng knowledge search."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "search_kb",
+            "args": {
+              "category": "wifi"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "search_kb",
+            "args": {
+              "category": "wifi"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H15_compare_environments",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "duplicate_tool_parallel",
+        "difficulty": "hard",
+        "what_it_tests": "Cùng một tool phải được gọi hai lần với args khác nhau; thứ tự không quan trọng."
+      },
+      "input": "So sánh trạng thái email production và staging, đừng bỏ sót môi trường nào.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "email",
+              "environment": "production"
+            }
+          },
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "email",
+              "environment": "staging"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "email",
+              "environment": "production"
+            }
+          },
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "email",
+              "environment": "staging"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H16_compare_two_assets",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "multiple_assets",
+        "difficulty": "hard",
+        "what_it_tests": "Không được gộp hai asset IDs vào một argument hoặc chỉ kiểm tra một máy."
+      },
+      "input": "So sánh hardware snapshot của LT-204 và DT-031.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "hardware"
+            }
+          },
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "DT-031",
+              "check": "hardware"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-204",
+              "check": "hardware"
+            }
+          },
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "DT-031",
+              "check": "hardware"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H17_triage_with_three_sources",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "three_source_triage",
+        "difficulty": "hard",
+        "what_it_tests": "Một request rõ ràng cần ba nguồn; baseline one-tool rule sẽ làm fail."
+      },
+      "input": "VPN trên LT-318 sắp hết certificate; kiểm tra máy, status VPN production và tìm hướng dẫn VPN macOS.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-318",
+              "check": "vpn"
+            }
+          },
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "vpn",
+              "environment": "production"
+            }
+          },
+          {
+            "name": "search_kb",
+            "args": {
+              "category": "vpn"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-318",
+              "check": "vpn"
+            }
+          },
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "vpn",
+              "environment": "production"
+            }
+          },
+          {
+            "name": "search_kb",
+            "args": {
+              "category": "vpn"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H18_user_and_asset",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "user_asset_parallel",
+        "difficulty": "hard",
+        "what_it_tests": "Directory record và device diagnostic là hai nguồn riêng."
+      },
+      "input": "Tra tài khoản EMP-1007 và kiểm tra security của máy DT-087 được nêu trong yêu cầu này.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup_user",
+            "args": {
+              "employee_id": "EMP-1007"
+            }
+          },
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "DT-087",
+              "check": "security"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "lookup_user",
+            "args": {
+              "employee_id": "EMP-1007"
+            }
+          },
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "DT-087",
+              "check": "security"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H19_ambiguous_environment",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "clarify_environment",
+        "difficulty": "hard",
+        "what_it_tests": "Demo không map chắc chắn sang enum; phải hỏi production hay staging."
+      },
+      "input": "Kiểm tra email ở môi trường demo của team QA.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "choice",
+              "options": [
+                "production",
+                "staging"
+              ]
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "choice",
+              "options": [
+                "production",
+                "staging"
+              ]
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "H20_format_without_refetch",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": false,
+      "metadata": {
+        "skill": "format_only_boundary",
+        "difficulty": "hard",
+        "what_it_tests": "Tôn trọng 'không kiểm tra lại'; extra inspect call phải fail."
+      },
+      "input": "Đã có findings: DT-087 packet loss 12%, DIMM B1 lỗi. Chỉ format thành handoff report tên 'DT-087 hardware'; không kiểm tra lại.",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "format_incident_report",
+            "args": {
+              "template": "handoff",
+              "incident_title": "DT-087 hardware"
+            }
+          }
+        ]
+      },
+      "actual": {
+        "tool_calls": [
+          {
+            "name": "format_incident_report",
+            "args": {
+              "template": "handoff",
+              "incident_title": "DT-087 hardware"
+            }
+          }
+        ]
+      },
+      "provider_error": null,
+      "passed": true,
+      "failure_type": null,
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "M07_cancel_previous_action",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_cancel",
+        "difficulty": "hard",
+        "what_it_tests": "Latest cancellation phải thắng action request cũ; không clarify và không create."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "no_tool": true,
+        "behavior": "answer_without_tool"
+      },
+      "actual": {},
+      "provider_error": null,
+      "passed": false,
+      "failure_type": "unnecessary_tool",
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "M08_correct_then_parallel",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "multiturn_correction_parallel",
+        "difficulty": "hard",
+        "what_it_tests": "Carry corrected asset và tạo hai calls từ latest intent."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "inspect_device",
+            "args": {
+              "asset_id": "LT-318",
+              "check": "vpn"
+            }
+          },
+          {
+            "name": "check_service_status",
+            "args": {
+              "service": "vpn",
+              "environment": "production"
+            }
+          }
+        ]
+      },
+      "actual": {},
+      "provider_error": null,
+      "passed": false,
+      "failure_type": "wrong_arg_value",
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "M09_confirmation_invalidated",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "confirmation_payload_change",
+        "difficulty": "hard",
+        "what_it_tests": "Confirmation cũ mất hiệu lực khi priority/summary thay đổi."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "yes_no"
+            }
+          }
+        ]
+      },
+      "actual": {},
+      "provider_error": null,
+      "passed": false,
+      "failure_type": "wrong_boundary",
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    },
+    {
+      "id": "M10_latest_intent_wins",
+      "phase": "B",
+      "suite": "base",
+      "case_suite": "base",
+      "is_multiturn": true,
+      "metadata": {
+        "skill": "latest_intent_replacement",
+        "difficulty": "hard",
+        "what_it_tests": "Không gọi stale inspect_device từ turn đầu."
+      },
+      "input": "Multiturn query...",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "lookup_user",
+            "args": {
+              "employee_id": "EMP-1009"
+            }
+          }
+        ]
+      },
+      "actual": {},
+      "provider_error": null,
+      "passed": false,
+      "failure_type": "wrong_tool",
+      "tool_call_rounds": 1,
+      "total_tokens": 1500,
+      "duration_ms": 1200
+    }
+  ]
+}
