@@ -140,6 +140,10 @@ nhóm tự xây.
 - Failure nào không thể chỉ nhìn automatic score?
 - Nếu có thêm một vòng, nhóm sẽ thử hypothesis nào?
 
+## B7. Reflection (Cá nhân)
+
+Dưới đây là phần tự đánh giá của từng thành viên theo yêu cầu của Lab Guide.
+
 # PHẦN C — Checkout trước khi nộp
 
 Phần này được hoàn thành sau khi toàn bộ code, evidence và report đã được đưa
@@ -165,16 +169,14 @@ evidence thực tế trong repository, không chỉ mô tả cảm nhận chung.
 > Nhóm đã phân chia công việc rõ ràng: Hieu Pham lo `system_prompt.md`, Hoang-Hai chuẩn hóa `tools.yaml`, Khanh xây dựng test case trong `data/eval_group.json`, và Huy dựng Streamlit UI + Report. Việc tích hợp diễn ra trơn tru qua pull request và thảo luận trên GitHub.
 > Nếu có vòng sau, nhóm ưu tiên kiểm chứng các prompt kỹ thuật (như few-shot) để giảm token usage và thử tích hợp thêm external search.
 
-## C2. Self-reflection của từng thành viên
+## C2. Self-reflection của từng thành viên (Đã dời lên B7)
 
 Mỗi thành viên tự viết một mục riêng về phần việc chính mình đã thực hiện trong
 repository chung. Không viết thay hoặc gộp nhiều thành viên vào một câu trả lời.
 Mỗi reflection cần trỏ đến file, commit hoặc pull request có thật để người đọc
 có thể đối chiếu đóng góp.
 
-Sao chép mẫu dưới đây cho từng thành viên:
-
-### Hieu Pham (A) — 202602917
+### B7.1 Reflection cá nhân — Phạm Minh Hiếu - 2A202602919
 
 - **Vai trò/phần việc được nhận:** A — Prompt Engineer. Thiết kế, cải thiện và thử nghiệm các phiên bản `system_prompt.md`.
 - **Những gì tôi đã thay đổi trong repo chung:** Tạo ra các phiên bản `v1`, `v2`, `v3`, `v4` của `system_prompt.md`. Định nghĩa các rule chống đoán mò identifier và action boundaries.
@@ -185,7 +187,7 @@ Sao chép mẫu dưới đây cho từng thành viên:
 - **Điều tôi học được từ phần việc này:** Càng nhồi nhét nhiều rule dài dòng vào prompt chưa chắc đã tốt (như `v3`). Câu lệnh ngắn gọn, dứt khoát mang lại accuracy cao hơn.
 - **Nếu làm lại, tôi sẽ cải thiện điều gì:** Sử dụng few-shot examples trong prompt thay vì chỉ mô tả bằng text để model học patterns tốt hơn.
 
-### Hoang-Hai (B) — 202602918
+### B7.2 Reflection cá nhân — Nguyễn Việt Hoàng Hải - 2A202602967
 
 - **Vai trò/phần việc được nhận:** B — Tool Designer. Chuẩn hóa interface của các tool.
 - **Những gì tôi đã thay đổi trong repo chung:** Sửa đổi `tools.yaml`, thêm các enum hợp lệ cho tham số và làm rõ descriptions để model dễ dàng map query với tool.
@@ -196,7 +198,7 @@ Sao chép mẫu dưới đây cho từng thành viên:
 - **Điều tôi học được từ phần việc này:** Tool description đóng vai trò quan trọng như system prompt trong việc định hướng routing.
 - **Nếu làm lại, tôi sẽ cải thiện điều gì:** Xây dựng thêm tool bonus để lấy thông tin từ external API.
 
-### Khanh (C) — 202602916
+### B7.3 Reflection cá nhân — Nguyễn Thị Minh Khánh - 2A202602546
 
 - **Vai trò/phần việc được nhận:** C — QA & Eval. Xây dựng các test case và đánh giá.
 - **Những gì tôi đã thay đổi trong repo chung:** Cấu trúc 10 test case đa lượt và đơn lượt cho bộ `eval_group.json` (từ G01 đến G10).
@@ -207,7 +209,7 @@ Sao chép mẫu dưới đây cho từng thành viên:
 - **Điều tôi học được từ phần việc này:** Cấu trúc JSON của evaluator khá nghiêm ngặt, cần hiểu rõ cách hệ thống chấm điểm để viết expectation phù hợp.
 - **Nếu làm lại, tôi sẽ cải thiện điều gì:** Bổ sung thêm adversarial cases phức tạp hơn (VD: prompt injection qua file log).
 
-### Riel Human (Huy) — 202602919
+### B7.4 Reflection cá nhân — Nguyễn Quang Huy - 2A202602421
 
 - **Vai trò/phần việc được nhận:** D — UI & Report Coordinator. Dựng Live Chat Streamlit, test kịch bản demo, tổng hợp REPORT.md.
 - **Những gì tôi đã thay đổi trong repo chung:** Tạo `app.py` (Streamlit UI Pro Max với Glassmorphism, custom CSS, Google Fonts, micro-animations), điền các phần A1-A4, B4, B4a và C2 trong `REPORT.md`.
