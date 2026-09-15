@@ -3,7 +3,11 @@
 ## Team
 
 - Team: 2A202602919
-- Members: Hieu Pham (A), Hoang-Hai (B), Khanh (C), Riel Human / Huy (D)
+- Members:
+  - Phạm Minh Hiếu - 2A202602919 (A)
+  - Nguyễn Thị Minh Khánh - 2A202602546 (C)
+  - Nguyễn Việt Hoàng Hải - 2A202602967 (B)
+  - Nguyễn Quang Huy / Riel Human - 2A202602421 (D)
 - Provider/model: OpenAI (Cockpit proxy) / gpt-5.5
 
 # PHẦN A — Giới thiệu agent
