@@ -2,8 +2,12 @@
 
 ## Team
 
-- Team:
+- Team: 2A202602919
 - Members:
+  - Phạm Minh Hiếu - 2A202602919
+  - Nguyễn Thị Minh Khánh - 2A202602546
+  - Nguyễn Việt Hoàng Hải - 2A202602967
+  - Nguyễn Quang Huy - 2A202602421
 - Provider/model:
 
 # PHẦN A — Giới thiệu agent
@@ -61,7 +65,16 @@ Liệt kê đúng 10 case tự viết: 5 single-turn và 5 multi-turn.
 
 | Case ID | What it tests | Expected behavior | Result |
 |---|---|---|---|
-|  |  |  |  |
+| G01_sso_status_production | Dịch vụ đăng nhập SSO dùng chung | check_service_status(service="sso", environment="production") | Pending |
+| G02_missing_asset_hardware_check | Yêu cầu kiểm tra phần cứng thiếu mã máy | clarify(response_type="text") | Pending |
+| G03_meeting_room_hardware | Trích đúng mã thiết bị RM-501 & check=hardware | inspect_device(asset_id="RM-501", check="hardware") | Pending |
+| G04_ticket_unconfirmed_request | Tạo ticket khẩn cấp phải xin xác nhận Yes/No | clarify(response_type="yes_no") | Pending |
+| G05_out_of_scope_payroll | Yêu cầu khiếu nại tiền lương (ngoài phạm vi IT) | no_tool (từ chối lịch sự) | Pending |
+| G06_multiturn_correct_service | Sửa ý định từ printing sang email staging | check_service_status(service="email", environment="staging") | Pending |
+| G07_multiturn_clarify_then_inspect | Kế thừa mã LT-411 và áp dụng check=security | inspect_device(asset_id="LT-411", check="security") | Pending |
+| G08_multiturn_cancel_ticket | Hủy yêu cầu tạo ticket ở lượt sau | no_tool (xác nhận đã hủy) | Pending |
+| G09_multiturn_stale_confirmation | Đổi priority/payload làm mất hiệu lực confirm cũ | clarify(response_type="yes_no") | Pending |
+| G10_multiturn_user_then_device | Chuyển hẳn intent từ nhân sự sang kiểm tra máy LT-318 | inspect_device(asset_id="LT-318", check="security") | Pending |
 
 ## B4. Live chat evidence
 
